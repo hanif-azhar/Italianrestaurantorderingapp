@@ -2,6 +2,7 @@ import { Button } from '@/app/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/app/components/ui/card';
 import { ScrollArea } from '@/app/components/ui/scroll-area';
 import { Separator } from '@/app/components/ui/separator';
+import { Textarea } from '@/app/components/ui/textarea';
 import { ShoppingCart, Trash2, X } from 'lucide-react';
 import type { MenuItemType } from './MenuItem';
 
@@ -14,10 +15,22 @@ interface CartProps {
   onRemoveItem: (itemId: string) => void;
   onUpdateQuantity: (itemId: string, quantity: number) => void;
   onCheckout: () => void;
+  onClearCart: () => void;
+  orderNotes: string;
+  onOrderNotesChange: (notes: string) => void;
   onClose: () => void;
 }
 
-export function Cart({ items, onRemoveItem, onUpdateQuantity, onCheckout, onClose }: CartProps) {
+export function Cart({
+  items,
+  onRemoveItem,
+  onUpdateQuantity,
+  onCheckout,
+  onClearCart,
+  orderNotes,
+  onOrderNotesChange,
+  onClose,
+}: CartProps) {
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const serviceFee = subtotal * 0.1;
   const total = subtotal + serviceFee;
@@ -97,6 +110,21 @@ export function Cart({ items, onRemoveItem, onUpdateQuantity, onCheckout, onClos
         <Separator />
 
         <CardFooter className="flex flex-col gap-3 pt-4">
+          <div className="w-full space-y-2">
+            <label className="text-sm font-medium" htmlFor="order-notes">
+              Special requests
+            </label>
+            <Textarea
+              id="order-notes"
+              value={orderNotes}
+              onChange={(event) => onOrderNotesChange(event.target.value)}
+              placeholder="Add allergies, preferences, or extra instructions..."
+              maxLength={200}
+            />
+            <p className="text-xs text-muted-foreground text-right">
+              {orderNotes.length}/200
+            </p>
+          </div>
           <div className="w-full text-sm text-muted-foreground space-y-2">
             <div className="flex items-center justify-between">
               <span>Subtotal</span>
@@ -119,6 +147,15 @@ export function Cart({ items, onRemoveItem, onUpdateQuantity, onCheckout, onClos
           >
             Place Order
           </Button>
+          {items.length > 0 && (
+            <Button
+              onClick={onClearCart}
+              variant="outline"
+              className="w-full"
+            >
+              Clear cart
+            </Button>
+          )}
         </CardFooter>
       </Card>
     </div>

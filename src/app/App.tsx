@@ -20,6 +20,7 @@ export default function App() {
   const [showCart, setShowCart] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('Antipasti');
+  const [orderNotes, setOrderNotes] = useState('');
 
   const handleScanSuccess = (decodedText: string) => {
     setTableNumber(decodedText);
@@ -41,6 +42,11 @@ export default function App() {
         console.error('Failed to parse cart from localStorage', error);
       }
     }
+
+    const storedNotes = localStorage.getItem('orderNotes');
+    if (storedNotes) {
+      setOrderNotes(storedNotes);
+    }
   }, []);
 
   useEffect(() => {
@@ -54,6 +60,14 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
+
+  useEffect(() => {
+    if (orderNotes) {
+      localStorage.setItem('orderNotes', orderNotes);
+    } else {
+      localStorage.removeItem('orderNotes');
+    }
+  }, [orderNotes]);
 
   const addToCart = (item: MenuItemType) => {
     setCart((prev) => {
@@ -101,7 +115,15 @@ export default function App() {
     setTimeout(() => {
       setOrderPlaced(false);
       setCart([]);
+      setOrderNotes('');
     }, 5000);
+  };
+
+  const handleChangeTable = () => {
+    setTableNumber(null);
+    setCart([]);
+    setOrderNotes('');
+    setShowScanner(true);
   };
 
   const getItemQuantity = (itemId: string) => {
@@ -139,6 +161,16 @@ export default function App() {
                 >
                   <QrCode className="h-4 w-4 mr-2" />
                   Scan Table
+                </Button>
+              )}
+              {tableNumber && (
+                <Button
+                  onClick={handleChangeTable}
+                  variant="outline"
+                  size="sm"
+                  className="border-[#009246] text-[#009246] hover:bg-[#009246]/10"
+                >
+                  Change Table
                 </Button>
               )}
               
@@ -253,6 +285,9 @@ export default function App() {
           onRemoveItem={deleteFromCart}
           onUpdateQuantity={updateQuantity}
           onCheckout={handleCheckout}
+          onClearCart={() => setCart([])}
+          orderNotes={orderNotes}
+          onOrderNotesChange={setOrderNotes}
           onClose={() => setShowCart(false)}
         />
       )}
