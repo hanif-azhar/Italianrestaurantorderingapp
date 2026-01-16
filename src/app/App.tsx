@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { QRScanner } from '@/app/components/QRScanner';
 import { MenuItem } from '@/app/components/MenuItem';
 import { Cart } from '@/app/components/Cart';
@@ -20,11 +20,54 @@ export default function App() {
   const [showCart, setShowCart] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('Antipasti');
+  const [orderNotes, setOrderNotes] = useState('');
 
   const handleScanSuccess = (decodedText: string) => {
     setTableNumber(decodedText);
     setShowScanner(false);
   };
+
+  useEffect(() => {
+    const storedTable = localStorage.getItem('tableNumber');
+    if (storedTable) {
+      setTableNumber(storedTable);
+    }
+
+    const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+      try {
+        const parsed = JSON.parse(storedCart) as CartItem[];
+        setCart(parsed);
+      } catch (error) {
+        console.error('Failed to parse cart from localStorage', error);
+      }
+    }
+
+    const storedNotes = localStorage.getItem('orderNotes');
+    if (storedNotes) {
+      setOrderNotes(storedNotes);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (tableNumber) {
+      localStorage.setItem('tableNumber', tableNumber);
+    } else {
+      localStorage.removeItem('tableNumber');
+    }
+  }, [tableNumber]);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
+
+  useEffect(() => {
+    if (orderNotes) {
+      localStorage.setItem('orderNotes', orderNotes);
+    } else {
+      localStorage.removeItem('orderNotes');
+    }
+  }, [orderNotes]);
 
   const addToCart = (item: MenuItemType) => {
     setCart((prev) => {
@@ -54,13 +97,33 @@ export default function App() {
     setCart((prev) => prev.filter((i) => i.id !== itemId));
   };
 
+  const updateQuantity = (itemId: string, quantity: number) => {
+    setCart((prev) => {
+      if (quantity <= 0) {
+        return prev.filter((item) => item.id !== itemId);
+      }
+
+      return prev.map((item) =>
+        item.id === itemId ? { ...item, quantity } : item
+      );
+    });
+  };
+
   const handleCheckout = () => {
     setOrderPlaced(true);
     setShowCart(false);
     setTimeout(() => {
       setOrderPlaced(false);
       setCart([]);
+      setOrderNotes('');
     }, 5000);
+  };
+
+  const handleChangeTable = () => {
+    setTableNumber(null);
+    setCart([]);
+    setOrderNotes('');
+    setShowScanner(true);
   };
 
   const getItemQuantity = (itemId: string) => {
@@ -98,6 +161,16 @@ export default function App() {
                 >
                   <QrCode className="h-4 w-4 mr-2" />
                   Scan Table
+                </Button>
+              )}
+              {tableNumber && (
+                <Button
+                  onClick={handleChangeTable}
+                  variant="outline"
+                  size="sm"
+                  className="border-[#009246] text-[#009246] hover:bg-[#009246]/10"
+                >
+                  Change Table
                 </Button>
               )}
               
@@ -210,12 +283,11 @@ export default function App() {
         <Cart
           items={cart}
           onRemoveItem={deleteFromCart}
-          onUpdateQuantity={(id, qty) => {
-            if (qty === 0) {
-              deleteFromCart(id);
-            }
-          }}
+          onUpdateQuantity={updateQuantity}
           onCheckout={handleCheckout}
+          onClearCart={() => setCart([])}
+          orderNotes={orderNotes}
+          onOrderNotesChange={setOrderNotes}
           onClose={() => setShowCart(false)}
         />
       )}
