@@ -18,7 +18,9 @@ interface CartProps {
 }
 
 export function Cart({ items, onRemoveItem, onUpdateQuantity, onCheckout, onClose }: CartProps) {
-  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const serviceFee = subtotal * 0.1;
+  const total = subtotal + serviceFee;
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
@@ -56,12 +58,33 @@ export function Cart({ items, onRemoveItem, onUpdateQuantity, onCheckout, onClos
                         €{(item.price * item.quantity).toFixed(2)}
                       </span>
                     </div>
+                    <div className="mt-3 flex items-center gap-2">
+                      <Button
+                        size="icon"
+                        variant="outline"
+                        onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
+                        className="h-8 w-8"
+                        aria-label={`Decrease quantity for ${item.name}`}
+                      >
+                        -
+                      </Button>
+                      <span className="w-8 text-center font-semibold">{item.quantity}</span>
+                      <Button
+                        size="icon"
+                        onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
+                        className="h-8 w-8 bg-[#009246] hover:bg-[#007A3A]"
+                        aria-label={`Increase quantity for ${item.name}`}
+                      >
+                        +
+                      </Button>
+                    </div>
                   </div>
                   <Button
                     variant="ghost"
                     size="icon"
                     onClick={() => onRemoveItem(item.id)}
                     className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                    aria-label={`Remove ${item.name} from cart`}
                   >
                     <Trash2 className="h-4 w-4" />
                   </Button>
@@ -74,6 +97,16 @@ export function Cart({ items, onRemoveItem, onUpdateQuantity, onCheckout, onClos
         <Separator />
 
         <CardFooter className="flex flex-col gap-3 pt-4">
+          <div className="w-full text-sm text-muted-foreground space-y-2">
+            <div className="flex items-center justify-between">
+              <span>Subtotal</span>
+              <span>€{subtotal.toFixed(2)}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span>Service fee (10%)</span>
+              <span>€{serviceFee.toFixed(2)}</span>
+            </div>
+          </div>
           <div className="w-full flex items-center justify-between text-lg font-bold">
             <span>Total</span>
             <span>€{total.toFixed(2)}</span>

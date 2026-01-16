@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { QRScanner } from '@/app/components/QRScanner';
 import { MenuItem } from '@/app/components/MenuItem';
 import { Cart } from '@/app/components/Cart';
@@ -26,6 +26,35 @@ export default function App() {
     setShowScanner(false);
   };
 
+  useEffect(() => {
+    const storedTable = localStorage.getItem('tableNumber');
+    if (storedTable) {
+      setTableNumber(storedTable);
+    }
+
+    const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+      try {
+        const parsed = JSON.parse(storedCart) as CartItem[];
+        setCart(parsed);
+      } catch (error) {
+        console.error('Failed to parse cart from localStorage', error);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (tableNumber) {
+      localStorage.setItem('tableNumber', tableNumber);
+    } else {
+      localStorage.removeItem('tableNumber');
+    }
+  }, [tableNumber]);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
+
   const addToCart = (item: MenuItemType) => {
     setCart((prev) => {
       const existing = prev.find((i) => i.id === item.id);
@@ -52,6 +81,18 @@ export default function App() {
 
   const deleteFromCart = (itemId: string) => {
     setCart((prev) => prev.filter((i) => i.id !== itemId));
+  };
+
+  const updateQuantity = (itemId: string, quantity: number) => {
+    setCart((prev) => {
+      if (quantity <= 0) {
+        return prev.filter((item) => item.id !== itemId);
+      }
+
+      return prev.map((item) =>
+        item.id === itemId ? { ...item, quantity } : item
+      );
+    });
   };
 
   const handleCheckout = () => {
@@ -210,11 +251,7 @@ export default function App() {
         <Cart
           items={cart}
           onRemoveItem={deleteFromCart}
-          onUpdateQuantity={(id, qty) => {
-            if (qty === 0) {
-              deleteFromCart(id);
-            }
-          }}
+          onUpdateQuantity={updateQuantity}
           onCheckout={handleCheckout}
           onClose={() => setShowCart(false)}
         />

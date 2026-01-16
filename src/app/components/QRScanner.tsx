@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import type { FormEvent } from 'react';
 import { Html5Qrcode } from 'html5-qrcode';
 import { Button } from '@/app/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app/components/ui/card';
+import { Input } from '@/app/components/ui/input';
 import { QrCode, X } from 'lucide-react';
 
 interface QRScannerProps {
@@ -12,6 +14,7 @@ interface QRScannerProps {
 export function QRScanner({ onScanSuccess, onClose }: QRScannerProps) {
   const [isScanning, setIsScanning] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [manualTable, setManualTable] = useState('');
 
   useEffect(() => {
     let html5QrCode: Html5Qrcode | null = null;
@@ -54,8 +57,9 @@ export function QRScanner({ onScanSuccess, onClose }: QRScannerProps) {
     };
   }, []);
 
-  const handleManualEntry = () => {
-    const tableNum = prompt("Enter your table number:");
+  const handleManualEntry = (event?: FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+    const tableNum = manualTable.trim();
     if (tableNum) {
       onScanSuccess(`Table ${tableNum}`);
     }
@@ -92,9 +96,18 @@ export function QRScanner({ onScanSuccess, onClose }: QRScannerProps) {
           
           <div className="text-center">
             <p className="text-sm text-muted-foreground mb-2">Or</p>
-            <Button onClick={handleManualEntry} variant="outline" className="w-full">
-              Enter Table Number Manually
-            </Button>
+            <form className="space-y-3" onSubmit={handleManualEntry}>
+              <Input
+                value={manualTable}
+                onChange={(event) => setManualTable(event.target.value)}
+                placeholder="Enter table number"
+                inputMode="numeric"
+                autoComplete="off"
+              />
+              <Button type="submit" variant="outline" className="w-full">
+                Confirm Table Number
+              </Button>
+            </form>
           </div>
         </CardContent>
       </Card>
