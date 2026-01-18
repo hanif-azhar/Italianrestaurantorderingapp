@@ -24,8 +24,12 @@ export function MenuItem({ item, quantity, onAdd, onRemove }: MenuItemProps) {
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow">
       {item.image && (
-        <div className="h-40 bg-gradient-to-br from-[#009246] to-[#DA291C] flex items-center justify-center text-white text-2xl">
-          {item.name.substring(0, 2)}
+        <div className="h-48 overflow-hidden">
+          <img 
+            src={item.image} 
+            alt={item.name}
+            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
         </div>
       )}
       
@@ -42,7 +46,7 @@ export function MenuItem({ item, quantity, onAdd, onRemove }: MenuItemProps) {
       </CardHeader>
       
       <CardFooter className="flex items-center justify-between">
-        <span className="text-xl font-bold">€{item.price.toFixed(2)}</span>
+        <span className="text-xl font-bold text-[#8B4513]">€{item.price.toFixed(2)}</span>
         
         <div className="flex items-center gap-2">
           {quantity > 0 ? (
@@ -51,7 +55,7 @@ export function MenuItem({ item, quantity, onAdd, onRemove }: MenuItemProps) {
                 size="icon"
                 variant="outline"
                 onClick={onRemove}
-                className="h-8 w-8"
+                className="h-8 w-8 border-[#8B4513] text-[#8B4513] hover:bg-[#8B4513]/10"
               >
                 <Minus className="h-4 w-4" />
               </Button>
@@ -59,7 +63,7 @@ export function MenuItem({ item, quantity, onAdd, onRemove }: MenuItemProps) {
               <Button
                 size="icon"
                 onClick={onAdd}
-                className="h-8 w-8 bg-[#009246] hover:bg-[#007A3A]"
+                className="h-8 w-8 bg-[#8B4513] hover:bg-[#6B3410]"
               >
                 <Plus className="h-4 w-4" />
               </Button>
@@ -68,7 +72,7 @@ export function MenuItem({ item, quantity, onAdd, onRemove }: MenuItemProps) {
             <Button
               onClick={onAdd}
               size="sm"
-              className="bg-[#DA291C] hover:bg-[#B82218]"
+              className="bg-[#B8860B] hover:bg-[#8B6914] text-white"
             >
               <Plus className="h-4 w-4 mr-1" />
               Add to Cart

@@ -9,6 +9,7 @@ export const menuData: MenuItemType[] = [
     price: 8.50,
     category: 'Antipasti',
     vegetarian: true,
+    image: 'https://images.unsplash.com/photo-1630230596557-ad07b433f5c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxicnVzY2hldHRhJTIwdG9tYXRvJTIwYmFzaWx8ZW58MXx8fHwxNzY4NDM5MjcwfDA&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
     id: 'antipasti-2',
@@ -16,6 +17,7 @@ export const menuData: MenuItemType[] = [
     description: 'Traditional Italian cured ham with fresh cantaloupe melon',
     price: 12.00,
     category: 'Antipasti',
+    image: 'https://images.unsplash.com/photo-1706521466459-4067e2b29946?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9zY2l1dHRvJTIwbWVsb24lMjBhcHBldGl6ZXJ8ZW58MXx8fHwxNzY4NDM5MjcwfDA&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
     id: 'antipasti-3',
@@ -24,6 +26,7 @@ export const menuData: MenuItemType[] = [
     price: 10.50,
     category: 'Antipasti',
     vegetarian: true,
+    image: 'https://images.unsplash.com/photo-1724154854089-4bbd0e7d09c8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYXByZXNlJTIwc2FsYWQlMjBtb3p6YXJlbGxhfGVufDF8fHx8MTc2ODQzOTI3MXww&ixlib=rb-4.1.0&q=80&w=1080',
   },
   
   // Primi (Pasta)
@@ -33,6 +36,7 @@ export const menuData: MenuItemType[] = [
     description: 'Classic Roman pasta with eggs, pecorino cheese, guanciale, and black pepper',
     price: 14.00,
     category: 'Primi',
+    image: 'https://images.unsplash.com/photo-1574885014162-92e4f12928db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzcGFnaGV0dGklMjBjYXJib25hcmElMjBwYXN0YXxlbnwxfHx8fDE3Njg0MTE5NDN8MA&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
     id: 'primi-2',
@@ -41,6 +45,7 @@ export const menuData: MenuItemType[] = [
     price: 12.00,
     category: 'Primi',
     vegetarian: true,
+    image: 'https://images.unsplash.com/photo-1673397815493-a53ab7c2879a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwZW5uZSUyMGFycmFiYmlhdGElMjBwYXN0YXxlbnwxfHx8fDE3Njg0MzkyNzF8MA&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
     id: 'primi-3',
@@ -48,6 +53,7 @@ export const menuData: MenuItemType[] = [
     description: 'Traditional layered pasta with rich meat ragù and béchamel sauce',
     price: 15.50,
     category: 'Primi',
+    image: 'https://images.unsplash.com/photo-1730900737654-ac6d843139da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXNhZ25lJTIwYm9sb2duZXNlfGVufDF8fHx8MTc2ODQzOTI3Mnww&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
     id: 'primi-4',
@@ -56,6 +62,7 @@ export const menuData: MenuItemType[] = [
     price: 16.00,
     category: 'Primi',
     vegetarian: true,
+    image: 'https://images.unsplash.com/photo-1723476654474-77baaeb27012?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyaXNvdHRvJTIwbXVzaHJvb218ZW58MXx8fHwxNzY4MzUzNjk5fDA&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
     id: 'primi-5',
@@ -64,6 +71,7 @@ export const menuData: MenuItemType[] = [
     price: 13.50,
     category: 'Primi',
     vegetarian: true,
+    image: 'https://images.unsplash.com/photo-1645112411341-6c4fd023714a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmZXR0dWNjaW5lJTIwYWxmcmVkb3xlbnwxfHx8fDE3Njg0MzkyNzJ8MA&ixlib=rb-4.1.0&q=80&w=1080',
   },
 
   // Pizza
@@ -74,6 +82,7 @@ export const menuData: MenuItemType[] = [
     price: 11.00,
     category: 'Pizza',
     vegetarian: true,
+    image: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYXJnaGVyaXRhJTIwcGl6emF8ZW58MXx8fHwxNzY4MzM5MDExfDA&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
     id: 'pizza-2',
@@ -82,6 +91,7 @@ export const menuData: MenuItemType[] = [
     price: 14.00,
     category: 'Pizza',
     vegetarian: true,
+    image: 'https://images.unsplash.com/photo-1595378833483-c995dbe4d74f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb3VyJTIwY2hlZXNlJTIwcGl6emF8ZW58MXx8fHwxNzY4Mzk0NjYxfDA&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
     id: 'pizza-3',
@@ -89,6 +99,7 @@ export const menuData: MenuItemType[] = [
     description: 'Spicy pizza with tomato, mozzarella, and spicy salami',
     price: 13.50,
     category: 'Pizza',
+    image: 'https://images.unsplash.com/photo-1708649360970-1739eb95204b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwZXBwZXJvbmklMjBwaXp6YSUyMHNwaWN5fGVufDF8fHx8MTc2ODQzOTI3M3ww&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
     id: 'pizza-4',
@@ -96,6 +107,7 @@ export const menuData: MenuItemType[] = [
     description: 'Pizza with tomato, mozzarella, ham, and mushrooms',
     price: 14.50,
     category: 'Pizza',
+    image: 'https://images.unsplash.com/photo-1692737580563-7ba2d896f0f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYW0lMjBtdXNocm9vbSUyMHBpenphfGVufDF8fHx8MTc2ODQzOTI3M3ww&ixlib=rb-4.1.0&q=80&w=1080',
   },
 
   // Secondi (Main Courses)
@@ -105,6 +117,7 @@ export const menuData: MenuItemType[] = [
     description: 'Braised veal shanks in white wine and vegetables, served with risotto',
     price: 24.00,
     category: 'Secondi',
+    image: 'https://images.unsplash.com/photo-1748712308129-1d200044113d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxvc3NvJTIwYnVjbyUyMHZlYWx8ZW58MXx8fHwxNzY4NDM5Mjc0fDA&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
     id: 'secondi-2',
@@ -112,6 +125,7 @@ export const menuData: MenuItemType[] = [
     description: 'Veal escalopes with prosciutto and sage in white wine sauce',
     price: 22.00,
     category: 'Secondi',
+    image: 'https://images.unsplash.com/photo-1695209418448-9a6658cb14e8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2ZWFsJTIwc2FsdGltYm9jY2F8ZW58MXx8fHwxNzY4NDM5Mjc0fDA&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
     id: 'secondi-3',
@@ -119,6 +133,7 @@ export const menuData: MenuItemType[] = [
     description: 'Breaded chicken breast with tomato sauce and melted mozzarella',
     price: 18.00,
     category: 'Secondi',
+    image: 'https://images.unsplash.com/photo-1685032235926-1b6141485c65?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlja2VuJTIwcGFybWlnaWFuYXxlbnwxfHx8fDE3NjgzNTM2OTl8MA&ixlib=rb-4.1.0&q=80&w=1080',
   },
 
   // Dolci (Desserts)
@@ -129,6 +144,7 @@ export const menuData: MenuItemType[] = [
     price: 7.50,
     category: 'Dolci',
     vegetarian: true,
+    image: 'https://images.unsplash.com/photo-1714385905983-6f8e06fffae1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0aXJhbWlzdSUyMGRlc3NlcnR8ZW58MXx8fHwxNzY4NDM4NzE1fDA&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
     id: 'dolci-2',
@@ -137,6 +153,7 @@ export const menuData: MenuItemType[] = [
     price: 6.50,
     category: 'Dolci',
     vegetarian: true,
+    image: 'https://images.unsplash.com/photo-1542116021-0ff087fb0a41?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwYW5uYSUyMGNvdHRhJTIwYmVycmllc3xlbnwxfHx8fDE3Njg0MzkyNzV8MA&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
     id: 'dolci-3',
@@ -145,6 +162,7 @@ export const menuData: MenuItemType[] = [
     price: 7.00,
     category: 'Dolci',
     vegetarian: true,
+    image: 'https://images.unsplash.com/photo-1749767138348-2e5bf1cbcef2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYW5ub2xpJTIwc2ljaWxpYW4lMjBkZXNzZXJ0fGVufDF8fHx8MTc2ODQzOTI3NXww&ixlib=rb-4.1.0&q=80&w=1080',
   },
 
   // Bevande (Drinks)
@@ -155,6 +173,7 @@ export const menuData: MenuItemType[] = [
     price: 3.50,
     category: 'Bevande',
     vegetarian: true,
+    image: 'https://images.unsplash.com/photo-1638688569176-5b6db19f9d2a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtaW5lcmFsJTIwd2F0ZXIlMjBib3R0bGV8ZW58MXx8fHwxNzY4NDM3MTA0fDA&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
     id: 'bevande-2',
@@ -163,6 +182,7 @@ export const menuData: MenuItemType[] = [
     price: 6.00,
     category: 'Bevande',
     vegetarian: true,
+    image: 'https://images.unsplash.com/photo-1630369160812-26c7604cbd8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZWQlMjB3aW5lJTIwZ2xhc3N8ZW58MXx8fHwxNzY4NDI0MDA5fDA&ixlib=rb-4.1.0&q=80&w=1080',
   },
   {
     id: 'bevande-3',
@@ -171,6 +191,7 @@ export const menuData: MenuItemType[] = [
     price: 2.50,
     category: 'Bevande',
     vegetarian: true,
+    image: 'https://images.unsplash.com/photo-1645445644664-8f44112f334c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlc3ByZXNzbyUyMGNvZmZlZSUyMGN1cHxlbnwxfHx8fDE3NjgzNDI3ODR8MA&ixlib=rb-4.1.0&q=80&w=1080',
   },
 ];
 

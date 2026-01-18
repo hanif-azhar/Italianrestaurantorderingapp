@@ -2,7 +2,6 @@ import { Button } from '@/app/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/app/components/ui/card';
 import { ScrollArea } from '@/app/components/ui/scroll-area';
 import { Separator } from '@/app/components/ui/separator';
-import { Textarea } from '@/app/components/ui/textarea';
 import { ShoppingCart, Trash2, X } from 'lucide-react';
 import type { MenuItemType } from './MenuItem';
 
@@ -15,25 +14,11 @@ interface CartProps {
   onRemoveItem: (itemId: string) => void;
   onUpdateQuantity: (itemId: string, quantity: number) => void;
   onCheckout: () => void;
-  onClearCart: () => void;
-  orderNotes: string;
-  onOrderNotesChange: (notes: string) => void;
   onClose: () => void;
 }
 
-export function Cart({
-  items,
-  onRemoveItem,
-  onUpdateQuantity,
-  onCheckout,
-  onClearCart,
-  orderNotes,
-  onOrderNotesChange,
-  onClose,
-}: CartProps) {
-  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const serviceFee = subtotal * 0.1;
-  const total = subtotal + serviceFee;
+export function Cart({ items, onRemoveItem, onUpdateQuantity, onCheckout, onClose }: CartProps) {
+  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
@@ -71,33 +56,12 @@ export function Cart({
                         €{(item.price * item.quantity).toFixed(2)}
                       </span>
                     </div>
-                    <div className="mt-3 flex items-center gap-2">
-                      <Button
-                        size="icon"
-                        variant="outline"
-                        onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
-                        className="h-8 w-8"
-                        aria-label={`Decrease quantity for ${item.name}`}
-                      >
-                        -
-                      </Button>
-                      <span className="w-8 text-center font-semibold">{item.quantity}</span>
-                      <Button
-                        size="icon"
-                        onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
-                        className="h-8 w-8 bg-[#009246] hover:bg-[#007A3A]"
-                        aria-label={`Increase quantity for ${item.name}`}
-                      >
-                        +
-                      </Button>
-                    </div>
                   </div>
                   <Button
                     variant="ghost"
                     size="icon"
                     onClick={() => onRemoveItem(item.id)}
                     className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                    aria-label={`Remove ${item.name} from cart`}
                   >
                     <Trash2 className="h-4 w-4" />
                   </Button>
@@ -110,31 +74,6 @@ export function Cart({
         <Separator />
 
         <CardFooter className="flex flex-col gap-3 pt-4">
-          <div className="w-full space-y-2">
-            <label className="text-sm font-medium" htmlFor="order-notes">
-              Special requests
-            </label>
-            <Textarea
-              id="order-notes"
-              value={orderNotes}
-              onChange={(event) => onOrderNotesChange(event.target.value)}
-              placeholder="Add allergies, preferences, or extra instructions..."
-              maxLength={200}
-            />
-            <p className="text-xs text-muted-foreground text-right">
-              {orderNotes.length}/200
-            </p>
-          </div>
-          <div className="w-full text-sm text-muted-foreground space-y-2">
-            <div className="flex items-center justify-between">
-              <span>Subtotal</span>
-              <span>€{subtotal.toFixed(2)}</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span>Service fee (10%)</span>
-              <span>€{serviceFee.toFixed(2)}</span>
-            </div>
-          </div>
           <div className="w-full flex items-center justify-between text-lg font-bold">
             <span>Total</span>
             <span>€{total.toFixed(2)}</span>
@@ -142,20 +81,11 @@ export function Cart({
           <Button
             onClick={onCheckout}
             disabled={items.length === 0}
-            className="w-full bg-[#009246] hover:bg-[#007A3A] text-white"
+            className="w-full bg-[#8B4513] hover:bg-[#6B3410] text-white"
             size="lg"
           >
             Place Order
           </Button>
-          {items.length > 0 && (
-            <Button
-              onClick={onClearCart}
-              variant="outline"
-              className="w-full"
-            >
-              Clear cart
-            </Button>
-          )}
         </CardFooter>
       </Card>
     </div>
